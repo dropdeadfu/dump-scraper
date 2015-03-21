@@ -33,12 +33,13 @@ for (dirpath, dirnames, filenames) in os.walk(dir_raw):
                 if os.path.exists(dir_training + "hash/" + rf):
                     continue
 
-                print rawdirpath + "/" + rf
-                with open(rawdirpath + "/" + rf) as rfh:
-                    #head = [next(rfh) for x in xrange(20)]
-                    head = list(islice(rfh, 20))
-
-                print head
+                N=20
+                tfile=open(rawdirpath + "/" + rf)
+                for i in range(N):
+                    line=tfile.next().strip()
+                    print line
+                tfile.close()
+                
                 print rawdirpath + "/" + rf
                 answer = raw_input("[t]rash [p]lain [h]ash => ")
 

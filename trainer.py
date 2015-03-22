@@ -33,21 +33,27 @@ for (dirpath, dirnames, filenames) in os.walk(dir_raw):
                 if os.path.exists(dir_training + "hash/" + rf):
                     continue
 
-                N=20
+                print rawdirpath + "/" + rf
+                N=60
+                i=0
                 tfile=open(rawdirpath + "/" + rf)
-                for i in range(N):
-                    line=tfile.next().strip()
-                    print line
+                for line in tfile:
+                    i = i + 1
+                    if i <= N:
+                      print line.strip()
+                    else:
+                      continue
                 tfile.close()
-                
+
                 print rawdirpath + "/" + rf
                 answer = raw_input("[t]rash [p]lain [h]ash => ")
 
                 if answer == "t":
                    shutil.copyfile(rawdirpath + "/" + rf, dir_training + "trash/" + rf)
-                if answer == "p":
+                elif answer == "p":
                    shutil.copyfile(rawdirpath + "/" + rf, dir_training + "plain/" + rf)
-                if answer == "h":
+                elif answer == "h":
                    shutil.copyfile(rawdirpath + "/" + rf, dir_training + "hash/" + rf)
-
+                else:
+                   print "Skipping...\n"
 
